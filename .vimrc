@@ -1,3 +1,6 @@
+"colorscheme tango
+"colorscheme kib_darktango
+
 let g:colorizer_auto_color = 1
 let g:colorizer_x11_names = 1
 
@@ -11,6 +14,8 @@ au BufNewFile,BufRead *.otl colorscheme solarized
 au BufNewFile,BufRead *.otl set nolist
 
 map ,gtd :!gtd %<C-M>:e<C-M><C-M> 
+
+nmap <C-p> :set paste!<CR>
 
 python << endpython
 import vim
@@ -315,6 +320,7 @@ au!
     " allows us to run :make and get syntax errors for our python scripts
     au FileType python set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
     au FileType python set expandtab
+    au BufRead,BufNewFile *.mak setfiletype mako
 
     augroup END
 endif
@@ -324,10 +330,13 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType mako set expandtab
+autocmd FileType mako set ts=4
+autocmd FileType html set ts=4
+autocmd FileType html set expandtab
 
 au BufWritePost *.py !pyflakes %
 au BufWritePost *.py !pep8 %
-au BufWritePost *.js !jsl -conf %
 
 call pathogen#infect('bundle')
 call pathogen#runtime_append_all_bundles()
